@@ -32,6 +32,18 @@ def most_and_least_common_type(treats):
     >>> most_and_least_common_type(treats)
     ('dessert', 'appetizer')
 
+    >>> treats = [{'type': 'dessert'}]
+    >>> most_and_least_common_type(treats)
+    ('dessert', 'dessert')
+
+    >>> treats = []
+    >>> most_and_least_common_type(treats)
+    (None, None)
+
+    >>> treats = [{'type': 'dessert'},{'type': 'appetizer'}]
+    >>> most_and_least_common_type(treats)
+    ('appetizer', 'appetizer')
+
     """
 
     types = {}
@@ -44,7 +56,8 @@ def most_and_least_common_type(treats):
     least_count = least_type = None
 
     # Find most, least common by comparing each item
-    for ttype, count in types.items():
+    # Sorted types.items so that tuples are alphabetical
+    for ttype, count in sorted(types.items()):
         if most_count is None or count > most_count:
             most_count = count
             most_type = ttype
